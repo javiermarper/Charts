@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+	
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!--HighCharts-->
+	<script src="https://code.highcharts.com/highcharts.js"></script>
+	<script src="https://code.highcharts.com/modules/exporting.js"></script>
+	
+	<!-- JQuery -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+	<!--BOOTSTRAP-->
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+	
+
+</head>
+
+
+<body>
+
+	<br />
+	<div class="dropdown col-md-offset-1">
+	  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Select Analisys
+	  <span class="caret"></span></button>
+	  <ul class="dropdown-menu">
+		<li><a id="General" href="#">General</a></li>
+		<li><a id="Titularidad" href="#">Titularidad</a></li>
+		<li><a id="Via" href="#">Via Acceso</a></li>
+		<li><a id="Centros" href="#">Centros</a></li>
+	  </ul>
+	</div>
+	
+	<br /><br />
+
+	<div id="AnalisisGeneral" hidden>
+		<div class="row">
+			<div class="col-md-3">
+				<div id="NotaMedia"></div>
+			</div>
+			<div class="col-md-3 col-md-offset-1">
+				<div id="NotaMediaUCA"></div>
+			</div>
+			<div class="col-md-3 col-md-offset-1">
+				<div id="ComparativaUCA"></div>
+			</div>
+		</div>
+		<br />
+		<div class="row">
+			<div class="col-md-3 col-md-offset-1">
+				<div id="Relacion"></div>
+			</div>
+		</div>
+	</div>
+	
+	<div id="AnalisisTitularidad" hidden>
+		<div class="row">
+			<div class="col-md-3">
+				<div id="Procedencia"></div>
+			</div>
+			<div class="col-md-3 col-md-offset-1">
+				<div id="NotaMediaTitularidad"></div>
+			</div>
+		</div>
+	</div>
+	
+</body>
+
+
+<script>
+	$(document).ready(function(){
+		$("#General").click(function(){
+			$("#AnalisisGeneral").show();
+			$("#AnalisisTitularidad").hide();
+		});
+		$("#Titularidad").click(function(){
+			$("#AnalisisGeneral").hide();
+			$("#AnalisisTitularidad").show();
+		});
+	});
+</script>
+
+<!--AnalisisGeneral-->
+<script>
+Highcharts.chart('NotaMedia', {
+    chart: {
+        type: 'column'
+    },
+    title: {
+        text: 'Nota Media'
+    },
+    subtitle: {
+        text: '(sobre 10)'
+    },
+    xAxis: {
+        categories: [
+            'Acceso',
+            'Graduacion',
+        ],
+        crosshair: true
+    },
+    yAxis: {
+        min: 5,
+        title: {
+            text: 'Nota'
+        }
+    },
+    tooltip: {
+        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+            '<td style="padding:0"><b>{point.y:.1f} </b></td></tr>',
+        footerFormat: '</table>',
+        shared: true,
+        useHTML: true
+    },
+    plotOptions: {
+        column: {
+            pointPadding: 0.2,
+            borderWidth: 0
+        }
+    },
+    series: [{
+        name: 'Nota',
+        data: [7.63, 7.16]
+
+    }]
+});
+</script>
+<script>
+Highcharts.chart('NotaMediaUCA', {
+    chart: {
+        type: 'column'
+    },
+    title: {
+        text: 'Nota Media UCA'
+    },
+    subtitle: {
+        text: '(sobre 10)'
+    },
+    xAxis: {
+        categories: [
+            'ING',
+            'ECO',
+        ],
+        crosshair: true
+    },
+    yAxis: {
+        min: 5,
+        title: {
+            text: 'Nota'
+        }
+    },
+    tooltip: {
+        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+            '<td style="padding:0"><b>{point.y:.1f} </b></td></tr>',
+        footerFormat: '</table>',
+        shared: true,
+        useHTML: true
+    },
+    plotOptions: {
+        column: {
+            pointPadding: 0.2,
+            borderWidth: 0
+        }
+    },
+    series: [{
+        name: 'Acceso',
+        data: [7.12, 8.13]
+    },{
+        name: 'Graduacion',
+        data: [7.13, 7.17]
+
+    }]
+});
+</script>
+<script>
+Highcharts.chart('ComparativaUCA', {
+    chart: {
+        type: 'column'
+    },
+    title: {
+        text: 'Comparativa por UCA'
+    },
+    xAxis: {
+        categories: ['ING Acceso', 'ING Graduacion', 'ECO Acceso', 'ECO Graduacion']
+    },
+    yAxis: {
+        min: 0,
+        title: {
+            text: 'Total fruit consumption'
+        }
+    },
+    tooltip: {
+        pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.percentage:.0f}%)<br/>',
+        shared: true
+    },
+    plotOptions: {
+        column: {
+            stacking: 'percent'
+        }
+    },
+    series: [{
+        name: 'Q4',
+        data: [22,2,2,8]
+    }, {
+        name: 'Q3',
+        data: [47,80,19,65]
+    }, {
+        name: 'Q2',
+        data: [23,15,63,24]
+    }, {
+        name: 'Q1',
+        data: [8,3,16,3]
+    }]
+});
+</script>
+<script>
+Highcharts.chart('Relacion', {
+    chart: {
+        plotBackgroundColor: null,
+        plotBorderWidth: null,
+        plotShadow: false,
+        type: 'pie'
+    },
+    title: {
+        text: 'Relacion cuartiles Acceso-Graduacion'
+    },
+    tooltip: {
+        pointFormat: '{series.name}: <b>{point.y:.1f}%</b>'
+    },
+    plotOptions: {
+        pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+                enabled: true,
+                format: '<b>{point.name}</b>: {point.y:.1f} %',
+                style: {
+                    color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                }
+            }
+        }
+    },
+    series: [{
+        name: 'Porcentaje',
+        colorByPoint: true,
+        data: [{
+            name: 'Aumentan',
+            y: 62.20
+        }, {
+            name: 'Disminuyen',
+            y: 32.00,
+            sliced: true,
+            selected: true
+        }, {
+            name: 'Mantienen',
+            y: 15.80
+        }]
+    }]
+});
+</script>
+
+<!--AnalisisTitularidad-->
+<script>
+Highcharts.chart('NotaMediaTitularidad', {
+    chart: {
+        type: 'column'
+    },
+    title: {
+        text: 'Nota Media segun Titularidad'
+    },
+    subtitle: {
+        text: '(sobre 10)'
+    },
+    xAxis: {
+        categories: [
+            'Privada',
+            'Publica',
+        ],
+        crosshair: true
+    },
+    yAxis: {
+        min: 5,
+        title: {
+            text: 'Nota'
+        }
+    },
+    tooltip: {
+        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+            '<td style="padding:0"><b>{point.y:.1f} </b></td></tr>',
+        footerFormat: '</table>',
+        shared: true,
+        useHTML: true
+    },
+    plotOptions: {
+        column: {
+            pointPadding: 0.2,
+            borderWidth: 0
+        }
+    },
+    series: [{
+        name: 'Acceso',
+        data: [7.68, 7.10]
+    },{
+        name: 'Graduacion',
+        data: [7.56, 7.15]
+
+    }]
+});
+</script>
+<script>
+Highcharts.chart('Procedencia', {
+    chart: {
+        type: 'column'
+    },
+    title: {
+        text: 'Procedencia segun Titularidad'
+    },
+    subtitle: {
+        text: '(sobre 10)'
+    },
+    xAxis: {
+        categories: [
+            'ING',
+            'ECO',
+        ],
+        crosshair: true
+    },
+    yAxis: {
+        min: 5,
+        title: {
+            text: 'Nota'
+        }
+    },
+    tooltip: {
+        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+            '<td style="padding:0"><b>{point.y:.0f} </b></td></tr>',
+        footerFormat: '</table>',
+        shared: true,
+        useHTML: true
+    },
+    plotOptions: {
+        column: {
+            pointPadding: 0.2,
+            borderWidth: 0
+        }
+    },
+    series: [{
+        name: 'Privada',
+        data: [651, 2098]
+    },{
+        name: 'Publica',
+        data: [651, 1392]
+
+    }]
+});
+</script>
+</html>
