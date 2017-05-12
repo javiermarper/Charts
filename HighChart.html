@@ -225,17 +225,37 @@ box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.2);
 		</div>
 	</div>
 	
+	
+	
+	
 	<div id="AnalisisTitularidad" hidden>
 		<div class="row animation-element slide-left">
-			<div class="col-md-3">
+			<div class="col-md-offset-1">
+				<h3><b>PROCEDENCIA</b></h3>
+			</div>
+			<br />
+			<div class="col-md-3 col-md-offset-4">
 				<div id="Procedencia"></div>
 			</div>
-			<div class="col-md-3 col-md-offset-1">
+		</div>
+		<br />
+		<hr />
+		<br />
+		<div class="row animation-element slide-left">
+			<div class="col-md-offset-1">
+				<h3><b>RESULTADOS ACADEMICOS</b></h3>
+			</div>
+			<br />
+			<div class="col-md-3">
 				<div id="NotaMediaTitularidad"></div>
 			</div>
-			
+			<div class="col-md-3 col-md-offset-1">
+				<div id="ComparativaTitularidad"></div>
+			</div>
 		</div>
 	</div>
+	
+	
 </div>
 </body>
 
@@ -674,7 +694,7 @@ Highcharts.chart('Procedencia', {
         crosshair: true
     },
     yAxis: {
-        min: 5,
+        min: 6.5,
         title: {
             text: 'Nota'
         }
@@ -703,4 +723,47 @@ Highcharts.chart('Procedencia', {
     }]
 });
 </script>
+<script>
+Highcharts.chart('ComparativaTitularidad', {
+    chart: {
+        type: 'column'
+    },
+    title: {
+        text: 'Comparativa por Titularidad'
+    },
+    xAxis: {
+        categories: ['Privada Acceso', 'Privada Graduacion', 'Publica Acceso', 'Publica Graduacion']
+    },
+    yAxis: {
+        min: 0,
+        title: {
+            text: 'Porcentaje Alumnos Cuartil'
+        }
+    },
+    tooltip: {
+        pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.percentage:.0f}%)<br/>',
+        shared: true
+    },
+    plotOptions: {
+        column: {
+            stacking: 'percent'
+        }
+    },
+    series: [{
+        name: 'Q4',
+        data: [10,5,13,5]
+    }, {
+        name: 'Q3',
+        data: [33,75,33,69]
+    }, {
+        name: 'Q2',
+        data: [43,17,42,23]
+    }, {
+        name: 'Q1',
+        data: [14,3,12,3]
+    }]
+});
+</script>
+
+
 </html>
