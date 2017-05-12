@@ -18,8 +18,31 @@
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
+	<!--Chords-->
+	<script src="d3.v3.min.js"></script>
+	<script src="flowChord.js" charset="utf-8"></script>
 	
 <style>
+
+/*CHORDS*/
+    body {
+      font-family: sans-serif;
+      font-size: 12px;
+    }
+    #flow .flows {
+      opacity: .6;
+    }
+    #flow .chord-hover {
+      position: absolute;
+      visibility: hidden;
+      background: #EEE;
+      padding: 15px 25px 25px 15px;
+      border: 1px solid gray;
+      border-radius: 5px;
+    }
+/**/
+
+
 *,
 *:before,
 *:after {
@@ -252,8 +275,49 @@ box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.2);
 			<div class="col-md-3 col-md-offset-1">
 				<div id="ComparativaTitularidad"></div>
 			</div>
+			<div class="col-md-3 col-md-offset-1">
+				<div id="RelacionTitularidad"></div>
+			</div>
 		</div>
+		<br /><br />
+		<div class="row animation-element slide-left">
+			<div class="col-md-3 col-md-offset-1">
+				<div class="col-md-offset-4">
+					<h3><b>FLUJO PRIVADA</b></h3>
+				</div>
+				<br />
+				<div id="flowPrivada"></div>
+			</div>
+		</div>
+		<div class="row animation-element slide-left">
+			<div class="col-md-3 col-md-offset-1">
+				<div class="col-md-offset-4">
+					<h3><b>FLUJO PUBLICA</b></h3>
+				</div>
+				<br />
+				<div id="flowPublica"></div>
+			</div>
+		</div>
+		<br />
+		<hr />
+		<br />
+		<div class="row animation-element slide-left">
+			<div class="col-md-offset-1">
+				<h3><b>RENDIMIENTO</b></h3>
+			</div>
+			<br />
+			<div class="col-md-3">
+				<div id="TiempoGraduarseTitul"></div>
+			</div>
+			<div class="col-md-3 col-md-offset-1">
+				<div id="RendimientoINGTitul"></div>
+			</div>
+			<div class="col-md-3 col-md-offset-1">
+				<div id="RendimientoECOTitul"></div>
+			</div>
+		</div>		
 	</div>
+	
 	
 	
 </div>
@@ -635,9 +699,6 @@ Highcharts.chart('NotaMediaTitularidad', {
     title: {
         text: 'Nota Media segun Titularidad'
     },
-    subtitle: {
-        text: '(sobre 10)'
-    },
     xAxis: {
         categories: [
             'Privada',
@@ -764,6 +825,221 @@ Highcharts.chart('ComparativaTitularidad', {
     }]
 });
 </script>
+<script>
+Highcharts.chart('RelacionTitularidad', {
+    chart: {
+        type: 'column'
+    },
+    title: {
+        text: 'Relacion Acceso-Graduacion'
+    },
+    xAxis: {
+        categories: [
+            'Aumentan',
+            'Disminuyen',
+			'Mantienen'
+        ],
+        crosshair: true
+    },
+    yAxis: {
+        min: 0,
+        title: {
+            text: 'Porcentaje de Alumnos'
+        }
+    },
+    tooltip: {
+        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+            '<td style="padding:0"><b>{point.y:.0f} </b></td></tr>',
+        footerFormat: '</table>',
+        shared: true,
+        useHTML: true
+    },
+    plotOptions: {
+        column: {
+            pointPadding: 0.2,
+            borderWidth: 0
+        }
+    },
+    series: [{
+        name: 'Privada',
+        data: [4,67,29]
+    },{
+        name: 'Publica',
+        data: [7,57,36]
+
+    }]
+});
+</script>
+<script>
+  var colors = d3.scale.ordinal().range(["#AAA", "steelblue", "green", "orange", "brown"]);
+  var hoverHtml = {'fromQ4': '<h1>Cuartil 4</h1>Alumnos con nota de acceso entre 5 y 7.25 sobre 14 en el acceso', 
+      'fromQ3': '<h1>Cuartil 3</h1>Alumnos con nota de acceso entre 7.25 y 9.5 sobre 14 en el acceso', 
+      'fromQ2': '<h1>Cuartil 2</h1>Alumnos con nota de acceso entre 9.5 y 11.75 sobre 14 en el acceso',
+      'fromQ1': '<h1>Cuartil 1</h1>Alumnos con nota de acceso superior a 11.75 sobre 14 en el acceso',
+      'toQ4': '<h1>Cuartil 4</h1>Alumnos con nota de graduación entre 5 y 7.25 sobre 14 en la graduacion', 
+      'toQ3': '<h1>Cuartil 3</h1>Alumnos con nota de graduación entre 7.25 y 9.5 sobre 14 en la graduacion', 
+      'toQ2': '<h1>Cuartil 2</h1>Alumnos con nota de graduación entre 9.5 y 11.75 sobre 14 en la graduacion',
+      'toQ1': '<h1>Cuartil 1</h1>Alumnos con nota de graduación superior a 11.75 sobre 14 en la graduacion'}
+  var chordDiagram = d3.elts.flowChord().colors(colors).hoverHtml(hoverHtml).rimWidth(30);
+  var data = [['Cuartil','fromQ1','fromQ2','fromQ3','fromQ4'],['toQ1', 0.09,0.00,0.00,0.00], ['toQ2', 0.54,0.19,0.04,0.00],['toQ3', 0.36,0.75,0.77,0.86],['toQ4', 0.01,0.05,0.18,0.14]]
+  d3.select("#flowPrivada").datum(data).call(chordDiagram);
+
+  </script>
+<script>
+  var colors = d3.scale.ordinal().range(["#AAA", "steelblue", "green", "orange", "brown"]);
+  var hoverHtml = {'fromQ4': '<h1>Cuartil 4</h1>Alumnos con nota de acceso entre 5 y 7.25 sobre 14 en el acceso', 
+      'fromQ3': '<h1>Cuartil 3</h1>Alumnos con nota de acceso entre 7.25 y 9.5 sobre 14 en el acceso', 
+      'fromQ2': '<h1>Cuartil 2</h1>Alumnos con nota de acceso entre 9.5 y 11.75 sobre 14 en el acceso',
+      'fromQ1': '<h1>Cuartil 1</h1>Alumnos con nota de acceso superior a 11.75 sobre 14 en el acceso',
+      'toQ4': '<h1>Cuartil 4</h1>Alumnos con nota de graduación entre 5 y 7.25 sobre 14 en la graduacion', 
+      'toQ3': '<h1>Cuartil 3</h1>Alumnos con nota de graduación entre 7.25 y 9.5 sobre 14 en la graduacion', 
+      'toQ2': '<h1>Cuartil 2</h1>Alumnos con nota de graduación entre 9.5 y 11.75 sobre 14 en la graduacion',
+      'toQ1': '<h1>Cuartil 1</h1>Alumnos con nota de graduación superior a 11.75 sobre 14 en la graduacion'}
+  var chordDiagram = d3.elts.flowChord().colors(colors).hoverHtml(hoverHtml).rimWidth(30);
+  var data = [['Cuartil','fromQ1','fromQ2','fromQ3','fromQ4'],['toQ1', 0.09,0.02,0.00,0.00], ['toQ2', 0.61,0.27,0.09,0.05],['toQ3', 0.28,0.67,0.78, 0.74],['toQ4', 0.02,0.05,0.13,0.21]]
+  d3.select("#flowPublica").datum(data).call(chordDiagram);
+
+  </script>
+<script>
+Highcharts.chart('TiempoGraduarseTitul', {
+    chart: {
+        type: 'column'
+    },
+    title: {
+        text: 'Tiempo Graduarse segun Titularidad'
+    },
+    xAxis: {
+        categories: [
+            'AnysQ4',
+            'AnysQ3',
+			'AnysQ2',
+			'AnysQ1'
+        ],
+        crosshair: true
+    },
+    yAxis: {
+        min: 4,
+        title: {
+            text: 'Anys'
+        }
+    },
+    tooltip: {
+        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+            '<td style="padding:0"><b>{point.y:.2f} </b></td></tr>',
+        footerFormat: '</table>',
+        shared: true,
+        useHTML: true
+    },
+    plotOptions: {
+        column: {
+            pointPadding: 0.2,
+            borderWidth: 0
+        }
+    },
+    series: [{
+        name: 'Privada',
+        data: [4.94,4.56,4.36,4.11]
+    },{
+        name: 'Publica',
+        data: [4.89,4.57,4.25,4.20]
+    }]
+});
+</script> 
+<script>
+Highcharts.chart('RendimientoINGTitul', {
+    chart: {
+        type: 'column'
+    },
+    title: {
+        text: 'Rendimiento ING segun Titularidad'
+    },
+    xAxis: {
+        categories: [
+            '4 Anys',
+            '5 Anys',
+			'> 5 Anys'
+        ],
+        crosshair: true
+    },
+    yAxis: {
+        min: 0,
+        title: {
+            text: 'Porcentaje de Alumnos'
+        }
+    },
+    tooltip: {
+        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+            '<td style="padding:0"><b>{point.y:.0f} </b></td></tr>',
+        footerFormat: '</table>',
+        shared: true,
+        useHTML: true
+    },
+    plotOptions: {
+        column: {
+            pointPadding: 0.2,
+            borderWidth: 0
+        }
+    },
+    series: [{
+        name: 'ING Pr',
+        data: [15,19,24]
+    },{
+        name: 'ING Pu',
+        data: [19,19,22]
+
+    }]
+});
+</script>
+<script>
+Highcharts.chart('RendimientoECOTitul', {
+    chart: {
+        type: 'column'
+    },
+    title: {
+        text: 'Rendimiento ECO segun Titularidad'
+    },
+    xAxis: {
+        categories: [
+            '4 Anys',
+            '5 Anys',
+			'> 5 Anys'
+        ],
+        crosshair: true
+    },
+    yAxis: {
+        min: 0,
+        title: {
+            text: 'Porcentaje de Alumnos'
+        }
+    },
+    tooltip: {
+        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+            '<td style="padding:0"><b>{point.y:.0f} </b></td></tr>',
+        footerFormat: '</table>',
+        shared: true,
+        useHTML: true
+    },
+    plotOptions: {
+        column: {
+            pointPadding: 0.2,
+            borderWidth: 0
+        }
+    },
+    series: [{
+        name: 'ECO Pr',
+        data: [63,18,5]
+    },{
+        name: 'ECO Pu',
+        data: [67,13,10]
+
+    }]
+});
+</script>
 
 
+  
 </html>
