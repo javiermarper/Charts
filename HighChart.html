@@ -171,6 +171,7 @@ box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.2);
 	
 	<br /><br />
 
+	<hr />
 	<div id="AnalisisGeneral" hidden>
 		<div class="row animation-element slide-left">
 			<div class="col-md-3">
@@ -184,9 +185,21 @@ box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.2);
 			</div>
 		</div>
 		<br />
+		<br />
 		<div class="row animation-element slide-left">
-			<div class="col-md-3 col-md-offset-1">
+			<div class="col-md-3 col-md-offset-4">
 				<div id="Relacion"></div>
+			</div>
+		</div>
+		<br />
+		<hr />
+		<br />
+		<div class="row animation-element slide-left">
+			<div class="col-md-3">
+				<div id="TiempoGraduarse"></div>
+			</div>
+			<div class="col-md-3 col-md-offset-1">
+				<div id="Rendimiento"></div>
 			</div>
 		</div>
 	</div>
@@ -279,7 +292,7 @@ Highcharts.chart('NotaMedia', {
     tooltip: {
         headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
         pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-            '<td style="padding:0"><b>{point.y:.1f} </b></td></tr>',
+            '<td style="padding:0"><b>{point.y:.2f} </b></td></tr>',
         footerFormat: '</table>',
         shared: true,
         useHTML: true
@@ -324,7 +337,7 @@ Highcharts.chart('NotaMediaUCA', {
     tooltip: {
         headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
         pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-            '<td style="padding:0"><b>{point.y:.1f} </b></td></tr>',
+            '<td style="padding:0"><b>{point.y:.2f} </b></td></tr>',
         footerFormat: '</table>',
         shared: true,
         useHTML: true
@@ -428,6 +441,99 @@ Highcharts.chart('Relacion', {
             name: 'Mantienen',
             y: 15.80
         }]
+    }]
+});
+</script>
+<script>
+Highcharts.chart('TiempoGraduarse', {
+    chart: {
+        type: 'column'
+    },
+    title: {
+        text: 'Tiempo Graduarse por UCA'
+    },
+    xAxis: {
+        categories: [
+            'AnysQ4',
+            'AnysQ3',
+			'AnysQ2',
+			'AnysQ1'
+        ],
+        crosshair: true
+    },
+    yAxis: {
+        min: 4,
+        title: {
+            text: 'Anys'
+        }
+    },
+    tooltip: {
+        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+            '<td style="padding:0"><b>{point.y:.2f} </b></td></tr>',
+        footerFormat: '</table>',
+        shared: true,
+        useHTML: true
+    },
+    plotOptions: {
+        column: {
+            pointPadding: 0.2,
+            borderWidth: 0
+        }
+    },
+    series: [{
+        name: 'ING',
+        data: [5.21, 4.85, 4.54, 4.42]
+    },{
+        name: 'ECO',
+        data: [4.91, 4.37, 4.19, 4.11]
+
+    }]
+});
+</script>
+<script>
+Highcharts.chart('Rendimiento', {
+    chart: {
+        type: 'column'
+    },
+    title: {
+        text: 'Rendimiento por UCA'
+    },
+    xAxis: {
+        categories: [
+            '4 Anys',
+            '5 Anys',
+			'> 5 Anys'
+        ],
+        crosshair: true
+    },
+    yAxis: {
+        min: 0,
+        title: {
+            text: 'Anys'
+        }
+    },
+    tooltip: {
+        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+            '<td style="padding:0"><b>{point.y:.2f} </b></td></tr>',
+        footerFormat: '</table>',
+        shared: true,
+        useHTML: true
+    },
+    plotOptions: {
+        column: {
+            pointPadding: 0.2,
+            borderWidth: 0
+        }
+    },
+    series: [{
+        name: 'ING',
+        data: [0.17, 0.19, 0.23]
+    },{
+        name: 'ECO',
+        data: [0.86,0.16,0.07]
+
     }]
 });
 </script>
