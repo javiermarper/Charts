@@ -180,7 +180,7 @@ box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.2);
 
 <body>
 
-<div class="container-fluid">
+<div class="container-fluid" id="inicio">
 	<br />
 	<div class="dropdown col-md-offset-1">
 	  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Select Analisys
@@ -197,7 +197,24 @@ box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.2);
 
 	<hr />
 	<div id="AnalisisGeneral" hidden>
-		<div class="row animation-element slide-left">
+		<nav class="navbar navbar-inverse"><!--navbar-fixed-top-->
+		  <div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#">GENERAL</a>
+			</div>
+			<ul class="nav navbar-nav">
+				<li><a href="#ResAcadGen">Resultados Academicos</a></li>
+				<li><a href="#RendGen">Rendimiento</a></li>
+				<li><a href="#AbanGen">Abandonos</a></li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="#"><span class="glyphicon glyphicon-arrow-left"></span> Volver</a></li>
+			</ul>
+		  </div>
+		</nav>
+		
+		
+		<div class="row animation-element slide-left" id="ResAcadGen">
 			<div class="col-md-offset-1">
 				<h3><b>RESULTADOS ACADEMICOS</b></h3>
 			</div>
@@ -222,7 +239,7 @@ box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.2);
 		<br />
 		<hr />
 		<br />
-		<div class="row animation-element slide-left">
+		<div class="row animation-element slide-left" id="RendGen">
 			<div class="col-md-offset-1">
 				<h3><b>RENDIMIENTO</b></h3>
 			</div>
@@ -237,7 +254,7 @@ box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.2);
 		<br />
 		<hr />
 		<br />
-		<div class="row animation-element slide-left">
+		<div class="row animation-element slide-left" id="AbanGen">
 			<div class="col-md-offset-1">
 				<h3><b>ABANDONOS</b></h3>
 			</div>
@@ -315,7 +332,19 @@ box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.2);
 			<div class="col-md-3 col-md-offset-1">
 				<div id="RendimientoECOTitul"></div>
 			</div>
-		</div>		
+		</div>	
+		<br />
+		<hr />
+		<br />
+		<div class="row animation-element slide-left">
+			<div class="col-md-offset-1">
+				<h3><b>ABANDONOS</b></h3>
+			</div>
+			<br />
+			<div class="col-md-3 col-md-offset-4">
+				<div id="AbandonosTitul"></div>
+			</div>
+		</div>			
 	</div>
 	
 	
@@ -615,7 +644,7 @@ Highcharts.chart('Rendimiento', {
     yAxis: {
         min: 0,
         title: {
-            text: 'Anys'
+            text: 'Porcentaje de Alumnos'
         }
     },
     tooltip: {
@@ -1039,7 +1068,53 @@ Highcharts.chart('RendimientoECOTitul', {
     }]
 });
 </script>
+<script>
+Highcharts.chart('AbandonosTitul', {
+    chart: {
+        type: 'column'
+    },
+    title: {
+        text: 'Abandonos segun Titularidad'
+    },
+    xAxis: {
+        categories: [
+            'Q4',
+            'Q3',
+			'Q2',
+			'Q1'
+        ],
+        crosshair: true
+    },
+    yAxis: {
+        min: 0,
+        title: {
+            text: 'Porcentaje Abandonos'
+        }
+    },
+    tooltip: {
+        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+            '<td style="padding:0"><b>{point.y:.0f} </b></td></tr>',
+        footerFormat: '</table>',
+        shared: true,
+        useHTML: true
+    },
+    plotOptions: {
+        column: {
+            pointPadding: 0.2,
+            borderWidth: 0
+        }
+    },
+    series: [{
+        name: 'Privada',
+        data: [34,20,4,2]
+    },{
+        name: 'Publica',
+        data: [31,16,4,3]
 
+    }]
+});
+</script>
 
   
 </html>
