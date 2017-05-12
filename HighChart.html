@@ -157,6 +157,7 @@ box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.2);
 
 <body>
 
+<div class="container-fluid">
 	<br />
 	<div class="dropdown col-md-offset-1">
 	  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Select Analisys
@@ -174,6 +175,10 @@ box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.2);
 	<hr />
 	<div id="AnalisisGeneral" hidden>
 		<div class="row animation-element slide-left">
+			<div class="col-md-offset-1">
+				<h3><b>RESULTADOS ACADEMICOS</b></h3>
+			</div>
+			<br />
 			<div class="col-md-3">
 				<div id="NotaMedia"></div>
 			</div>
@@ -195,11 +200,27 @@ box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.2);
 		<hr />
 		<br />
 		<div class="row animation-element slide-left">
-			<div class="col-md-3">
+			<div class="col-md-offset-1">
+				<h3><b>RENDIMIENTO</b></h3>
+			</div>
+			<br />
+			<div class="col-md-3 col-md-offset-2">
 				<div id="TiempoGraduarse"></div>
 			</div>
-			<div class="col-md-3 col-md-offset-1">
+			<div class="col-md-3 col-md-offset-2">
 				<div id="Rendimiento"></div>
+			</div>
+		</div>
+		<br />
+		<hr />
+		<br />
+		<div class="row animation-element slide-left">
+			<div class="col-md-offset-1">
+				<h3><b>ABANDONOS</b></h3>
+			</div>
+			<br />
+			<div class="col-md-3 col-md-offset-4">
+				<div id="Abandonos"></div>
 			</div>
 		</div>
 	</div>
@@ -215,7 +236,7 @@ box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.2);
 			
 		</div>
 	</div>
-	
+</div>
 </body>
 
 
@@ -372,7 +393,7 @@ Highcharts.chart('ComparativaUCA', {
     yAxis: {
         min: 0,
         title: {
-            text: 'Total fruit consumption'
+            text: 'Porcentaje Alumnos Cuartil'
         }
     },
     tooltip: {
@@ -516,7 +537,7 @@ Highcharts.chart('Rendimiento', {
     tooltip: {
         headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
         pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-            '<td style="padding:0"><b>{point.y:.2f} </b></td></tr>',
+            '<td style="padding:0"><b>{point.y:.0f} </b></td></tr>',
         footerFormat: '</table>',
         shared: true,
         useHTML: true
@@ -529,10 +550,57 @@ Highcharts.chart('Rendimiento', {
     },
     series: [{
         name: 'ING',
-        data: [0.17, 0.19, 0.23]
+        data: [17,19,23]
     },{
         name: 'ECO',
-        data: [0.86,0.16,0.07]
+        data: [86,16,7]
+
+    }]
+});
+</script>
+<script>
+Highcharts.chart('Abandonos', {
+    chart: {
+        type: 'column'
+    },
+    title: {
+        text: 'Abandonos por UCA'
+    },
+    xAxis: {
+        categories: [
+            'Q4',
+            'Q3',
+			'Q2',
+			'Q1'
+        ],
+        crosshair: true
+    },
+    yAxis: {
+        min: 0,
+        title: {
+            text: 'Porcentaje Abandonos'
+        }
+    },
+    tooltip: {
+        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+            '<td style="padding:0"><b>{point.y:.0f} </b></td></tr>',
+        footerFormat: '</table>',
+        shared: true,
+        useHTML: true
+    },
+    plotOptions: {
+        column: {
+            pointPadding: 0.2,
+            borderWidth: 0
+        }
+    },
+    series: [{
+        name: 'ING',
+        data: [35,25,10,4]
+    },{
+        name: 'ECO',
+        data: [18,11,4,2]
 
     }]
 });
