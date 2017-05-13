@@ -3,6 +3,7 @@
 <html>
 
 <head>
+
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!--HighCharts-->
@@ -179,22 +180,24 @@ box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.2);
 </style>
 </head>
 
+
 <body>
-<div id="AnalisisGeneral">
+<div class="container-fluid">
+	<div id="AnalisisViaAcceso">
 		<nav class="navbar navbar-inverse navbar-fixed-top"><!--navbar-fixed-top-->
 		  <div class="container-fluid">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="#">GENERAL</a>
+				<a class="navbar-brand" href="#">VÍA ACCESO</a>
 			</div>
 			<ul class="nav navbar-nav">
-				<li><a href="#ResAcadGen">Resultados Académicos</a></li>
-				<li><a href="#RendGen">Rendimiento</a></li>
-				<li><a href="#AbanGen">Abandonos</a></li>
+				<li><a href="#ProcedVia">Procedencia y Preferencia</a></li>
+				<li><a href="#ResAcadVia">Resultados Académicos</a></li>
+				<li><a href="#RendVia">Rendimiento</a></li>
+				<li><a href="#AbanVia">Abandonos</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<!--Versión local (comentar para subirlo a la web)-->
 				<li><a href="file:///C:/Users/javi/Desktop/upf%204t/TFG/WEB/casosTFG/Charts/HighChart.html"><span class="glyphicon glyphicon-arrow-left"></span> Volver</a></li>
-				
 				<!--Versión web-->
 				<!--
 				<li><a href="http://rawgit.com/javiermarper/Charts/master/HighChart.html"><span class="glyphicon glyphicon-arrow-left"></span> Volver</a></li>
@@ -205,60 +208,74 @@ box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.2);
 		
 		<br /><br /><br />
 		
-		<div class="container-fluid">
-			<div class="row animation-element slide-left" id="ResAcadGen">
-				<div class="col-md-offset-1">
-					<h3><b>RESULTADOS ACADÉMICOS</b></h3>
-				</div>
-				<br />
-				<div class="col-md-3">
-					<div id="NotaMedia"></div>
-				</div>
-				<div class="col-md-3 col-md-offset-1">
-					<div id="NotaMediaUCA"></div>
-				</div>
-				<div class="col-md-3 col-md-offset-1">
-					<div id="ComparativaUCA"></div>
-				</div>
+		<div class="row animation-element slide-left" id="ProcedVia">
+			<div class="col-md-offset-1">
+				<h3><b>PROCEDENCIA Y PREFERENCIA</b></h3>
 			</div>
 			<br />
-			<br />
-			<div class="row animation-element slide-left">
-				<div class="col-md-3 col-md-offset-4">
-					<div id="Relacion"></div>
-				</div>
+			<div class="col-md-3 col-md-offset-2">
+				<div id="ProcedenciaVia"></div>
+			</div>
+			<div class="col-md-3 col-md-offset-2">
+				<div id="UCAPreferencia"></div>
+			</div>
+		</div>
+		<br />
+		<hr />
+		<br />
+		<div class="row animation-element slide-left" id="ResAcadVia">
+			<div class="col-md-offset-1">
+				<h3><b>RESULTADOS ACADÉMICOS</b></h3>
 			</div>
 			<br />
-			<hr />
-			<br />
-			<div class="row animation-element slide-left" id="RendGen">
-				<div class="col-md-offset-1">
-					<h3><b>RENDIMIENTO</b></h3>
-				</div>
-				<br />
-				<div class="col-md-3 col-md-offset-2">
-					<div id="TiempoGraduarse"></div>
-				</div>
-				<div class="col-md-3 col-md-offset-2">
-					<div id="Rendimiento"></div>
-				</div>
+			<div class="col-md-3 col-md-offset-2">
+				<div id="ComparativaVia"></div>
+			</div>
+			<div class="col-md-3 col-md-offset-2">
+				<div id="RelacionVia"></div>
+			</div>
+		</div>
+		<br /><br />
+		<div class="row animation-element slide-left" id="ProcedVia">
+			<div class="col-md-3 col-md-offset-2">
+				<div id="GraduacionUCAFP"></div>
+			</div>
+			<div class="col-md-3 col-md-offset-2">
+				<div id="GraduacionUCASele"></div>
+			</div>
+		</div>
+		<br />
+		<hr />
+		<br />
+		<div class="row animation-element slide-left" id="RendVia">
+			<div class="col-md-offset-1">
+				<h3><b>RENDIMIENTO</b></h3>
 			</div>
 			<br />
-			<hr />
+			<div class="col-md-3 col-md-offset-4">
+				<div id="TiempoGraduarseVia"></div>
+			</div>
+		</div>
+		<br />
+		<hr />
+		<br />
+		<div class="row animation-element slide-left" id="AbanVia">
+			<div class="col-md-offset-1">
+				<h3><b>ABANDONOS</b></h3>
+			</div>
 			<br />
-			<div class="row animation-element slide-left" id="AbanGen">
-				<div class="col-md-offset-1">
-					<h3><b>ABANDONOS</b></h3>
-				</div>
-				<br />
-				<div class="col-md-3 col-md-offset-4">
-					<div id="Abandonos"></div>
-				</div>
+			<div class="col-md-3 col-md-offset-4">
+				<div id="AbandonosVia"></div>
 			</div>
 		</div>
 		
-	
+		
+		
+	</div>
+</div>
+
 </body>
+
 
 <!--Animaciones-->
 <script>
@@ -292,144 +309,9 @@ $window.on('scroll resize', check_if_in_view);
 $window.trigger('scroll');
 </script>
 
-
-<!--AnalisisGeneral-->
+<!--Analisis ViaAcceso-->
 <script>
-Highcharts.chart('NotaMedia', {
-    chart: {
-        type: 'column'
-    },
-    title: {
-        text: 'Nota Media'
-    },
-    subtitle: {
-        text: '(sobre 10)'
-    },
-    xAxis: {
-        categories: [
-            'Acceso',
-            'Graduacion',
-        ],
-        crosshair: true
-    },
-    yAxis: {
-        min: 5,
-        title: {
-            text: 'Nota'
-        }
-    },
-    tooltip: {
-        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-            '<td style="padding:0"><b>{point.y:.2f} </b></td></tr>',
-        footerFormat: '</table>',
-        shared: true,
-        useHTML: true
-    },
-    plotOptions: {
-        column: {
-            pointPadding: 0.2,
-            borderWidth: 0
-        }
-    },
-    series: [{
-        name: 'Nota',
-        data: [7.63, 7.16]
-
-    }]
-});
-</script>
-<script>
-Highcharts.chart('NotaMediaUCA', {
-    chart: {
-        type: 'column'
-    },
-    title: {
-        text: 'Nota Media UCA'
-    },
-    subtitle: {
-        text: '(sobre 10)'
-    },
-    xAxis: {
-        categories: [
-            'ING',
-            'ECO',
-        ],
-        crosshair: true
-    },
-    yAxis: {
-        min: 5,
-        title: {
-            text: 'Nota'
-        }
-    },
-    tooltip: {
-        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-            '<td style="padding:0"><b>{point.y:.2f} </b></td></tr>',
-        footerFormat: '</table>',
-        shared: true,
-        useHTML: true
-    },
-    plotOptions: {
-        column: {
-            pointPadding: 0.2,
-            borderWidth: 0
-        }
-    },
-    series: [{
-        name: 'Acceso',
-        data: [7.12, 8.13]
-    },{
-        name: 'Graduacion',
-        data: [7.13, 7.17]
-
-    }]
-});
-</script>
-<script>
-Highcharts.chart('ComparativaUCA', {
-    chart: {
-        type: 'column'
-    },
-    title: {
-        text: 'Comparativa por UCA'
-    },
-    xAxis: {
-        categories: ['ING Acceso', 'ING Graduacion', 'ECO Acceso', 'ECO Graduacion']
-    },
-    yAxis: {
-        min: 0,
-        title: {
-            text: 'Porcentaje Alumnos Cuartil'
-        }
-    },
-    tooltip: {
-        pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.percentage:.0f}%)<br/>',
-        shared: true
-    },
-    plotOptions: {
-        column: {
-            stacking: 'percent'
-        }
-    },
-    series: [ {
-        name: 'Q1',
-        data: [8,3,16,3]
-    },{
-        name: 'Q2',
-        data: [23,15,63,24]
-    },{
-        name: 'Q3',
-        data: [47,80,19,65]
-    },{
-        name: 'Q4',
-        data: [22,2,2,8]
-    }]
-});
-</script>
-<script>
-Highcharts.chart('Relacion', {
+Highcharts.chart('ProcedenciaVia', {
     chart: {
         plotBackgroundColor: null,
         plotBorderWidth: null,
@@ -437,7 +319,7 @@ Highcharts.chart('Relacion', {
         type: 'pie'
     },
     title: {
-        text: 'Relación cuartiles Acceso-Graduación'
+        text: 'Procedencia según Vía de Acceso'
     },
     tooltip: {
         pointFormat: '{series.name}: <b>{point.y:.1f}%</b>'
@@ -459,80 +341,29 @@ Highcharts.chart('Relacion', {
         name: 'Porcentaje',
         colorByPoint: true,
         data: [{
-            name: 'Aumentan',
-            y: 62.2
+            name: 'FP',
+            y: 10.4
         }, {
-            name: 'Disminuyen',
-            y: 32.0,
+            name: 'Selectividad',
+            y: 89.6,
             sliced: true,
             selected: true
-        }, {
-            name: 'Mantienen',
-            y: 15.8
         }]
     }]
 });
 </script>
 <script>
-Highcharts.chart('TiempoGraduarse', {
+Highcharts.chart('UCAPreferencia', {
     chart: {
         type: 'column'
     },
     title: {
-        text: 'Tiempo Graduarse por UCA'
+        text: 'UCA de Preferencia'
     },
     xAxis: {
         categories: [
-            'AñosQ4',
-            'AñosQ3',
-			'AñosQ2',
-			'AñosQ1'
-        ],
-        crosshair: true
-    },
-    yAxis: {
-        min: 4,
-        title: {
-            text: 'Años'
-        }
-    },
-    tooltip: {
-        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-            '<td style="padding:0"><b>{point.y:.2f} </b></td></tr>',
-        footerFormat: '</table>',
-        shared: true,
-        useHTML: true
-    },
-    plotOptions: {
-        column: {
-            pointPadding: 0.2,
-            borderWidth: 0
-        }
-    },
-    series: [{
-        name: 'ING',
-        data: [5.21, 4.85, 4.54, 4.42]
-    },{
-        name: 'ECO',
-        data: [4.91, 4.37, 4.19, 4.11]
-
-    }]
-});
-</script>
-<script>
-Highcharts.chart('Rendimiento', {
-    chart: {
-        type: 'column'
-    },
-    title: {
-        text: 'Rendimiento por UCA'
-    },
-    xAxis: {
-        categories: [
-            '4 Años',
-            '5 Años',
-			'> 5 Años'
+            'FP',
+            'Selectividad',
         ],
         crosshair: true
     },
@@ -558,28 +389,243 @@ Highcharts.chart('Rendimiento', {
     },
     series: [{
         name: 'ING',
-        data: [17,19,23]
+        data: [62,21]
     },{
         name: 'ECO',
-        data: [86,16,7]
+        data: [38,79]
 
     }]
 });
 </script>
 <script>
-Highcharts.chart('Abandonos', {
+Highcharts.chart('ComparativaVia', {
     chart: {
         type: 'column'
     },
     title: {
-        text: 'Abandonos por UCA'
+        text: 'Comparativa según Vía de Acceso'
+    },
+    xAxis: {
+        categories: ['FP Acceso', 'FP Graduación', 'Sele Acceso', 'Sele Graduación']
+    },
+    yAxis: {
+        min: 0,
+        title: {
+            text: 'Porcentaje Alumnos Cuartil'
+        }
+    },
+    tooltip: {
+        pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.percentage:.0f}%)<br/>',
+        shared: true
+    },
+    plotOptions: {
+        column: {
+            stacking: 'percent'
+        }
+    },
+    series: [{
+        name: 'Q1',
+        data: [0,15,0,1]
+    }, {
+        name: 'Q2',
+        data: [18,60,9,18]
+    }, {
+        name: 'Q3',
+        data: [73,23,70,70]
+    }, {
+        name: 'Q4',
+        data: [9,3,22,11]
+    }]
+});
+</script>
+<script>
+Highcharts.chart('RelacionVia', {
+    chart: {
+        type: 'column'
+    },
+    title: {
+        text: 'Relación Acceso-Graduación'
+    },
+    xAxis: {
+        categories: [
+            'Aumentan',
+            'Disminuyen',
+			'Mantienen'
+        ],
+        crosshair: true
+    },
+    yAxis: {
+        min: 0,
+        title: {
+            text: 'Porcentaje de Alumnos'
+        }
+    },
+    tooltip: {
+        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+            '<td style="padding:0"><b>{point.y:.0f} </b></td></tr>',
+        footerFormat: '</table>',
+        shared: true,
+        useHTML: true
+    },
+    plotOptions: {
+        column: {
+            pointPadding: 0.2,
+            borderWidth: 0
+        }
+    },
+    series: [{
+        name: 'FP',
+        data: [10,50,40]
+    },{
+        name: 'Selectividad',
+        data: [4,72,24]
+
+    }]
+});
+</script>
+<script>
+Highcharts.chart('GraduacionUCAFP', {
+    chart: {
+        type: 'column'
+    },
+    title: {
+        text: 'Cuartiles Graduación FP según UCA'
+    },
+    xAxis: {
+        categories: ['FP ING', 'FP ECO']
+    },
+    yAxis: {
+        min: 0,
+        title: {
+            text: 'Porcentaje Alumnos Cuartil'
+        }
+    },
+    tooltip: {
+        pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.percentage:.0f}%)<br/>',
+        shared: true
+    },
+    plotOptions: {
+        column: {
+            stacking: 'percent'
+        }
+    },
+    series: [{
+        name: 'Q1',
+        data: [0,1]
+    }, {
+        name: 'Q2',
+        data: [9,8]
+    }, {
+        name: 'Q3',
+        data: [82,58]
+    }, {
+        name: 'Q4',
+        data: [9,33]
+    }]
+});
+</script>
+<script>
+Highcharts.chart('GraduacionUCASele', {
+    chart: {
+        type: 'column'
+    },
+    title: {
+        text: 'Cuartiles Graduación Sele según UCA'
+    },
+    xAxis: {
+        categories: ['Sele ING', 'Sele ECO']
+    },
+    yAxis: {
+        min: 0,
+        title: {
+            text: 'Porcentaje Alumnos Cuartil'
+        }
+    },
+    tooltip: {
+        pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.percentage:.0f}%)<br/>',
+        shared: true
+    },
+    plotOptions: {
+        column: {
+            stacking: 'percent'
+        }
+    },
+    series: [{
+        name: 'Q1',
+        data: [6,0]
+    }, {
+        name: 'Q2',
+        data: [7,19]
+    }, {
+        name: 'Q3',
+        data: [87,59]
+    }, {
+        name: 'Q4',
+        data: [0,12]
+    }]
+});
+</script>
+<script>
+Highcharts.chart('TiempoGraduarseVia', {
+    chart: {
+        type: 'column'
+    },
+    title: {
+        text: 'Tiempo Graduarse según Vía de Acceso'
+    },
+    xAxis: {
+        categories: [
+            'FP',
+            'Sele'
+        ],
+        crosshair: true
+    },
+    yAxis: {
+        min: 4,
+        title: {
+            text: 'Anys'
+        }
+    },
+    tooltip: {
+        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+            '<td style="padding:0"><b>{point.y:.2f} </b></td></tr>',
+        footerFormat: '</table>',
+        shared: true,
+        useHTML: true
+    },
+    plotOptions: {
+        column: {
+            pointPadding: 0.2,
+            borderWidth: 0
+        }
+    },
+    series: [{
+        name: 'ING',
+        data: [4.94,4.83]
+    },{
+        name: 'ECO',
+        data: [4.37,4.28]
+
+    }]
+});
+</script>
+<script>
+Highcharts.chart('AbandonosVia', {
+    chart: {
+        type: 'column'
+    },
+    title: {
+        text: 'Abandonos según Vía'
     },
     xAxis: {
         categories: [
             'Q4',
             'Q3',
 			'Q2',
-			'Q1'
+			'Q1',
+			'TOTAL'
         ],
         crosshair: true
     },
@@ -604,16 +650,15 @@ Highcharts.chart('Abandonos', {
         }
     },
     series: [{
-        name: 'ING',
-        data: [35,25,10,4]
+        name: 'FP',
+        data: [0,28,33,14,26]
     },{
-        name: 'ECO',
-        data: [18,11,4,2]
+        name: 'Sele',
+        data: [0,2,14,22,5]
 
     }]
 });
 </script>
-
 
 
 </html>

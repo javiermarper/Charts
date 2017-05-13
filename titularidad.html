@@ -3,6 +3,7 @@
 <html>
 
 <head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!--HighCharts-->
 	<script src="https://code.highcharts.com/highcharts.js"></script>
@@ -180,7 +181,7 @@ box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.2);
 
 <body>
 
-<div class="container-fluid" id="inicio">
+<div class="container-fluid">
 	<div id="AnalisisTitularidad">
 		<nav class="navbar navbar-inverse navbar-fixed-top"><!--navbar-fixed-top-->
 		  <div class="container-fluid">
@@ -189,20 +190,22 @@ box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.2);
 			</div>
 			<ul class="nav navbar-nav">
 				<li><a href="#ProcedTit">Procedencia</a></li>
-				<li><a href="#ResAcadTit">Resultados Academicos</a></li>
+				<li><a href="#ResAcadTit">Resultados Académicos</a></li>
 				<li><a href="#RendTit">Rendimiento</a></li>
 				<li><a href="#AbanTit">Abandonos</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<!--Versión local (comentar para subirlo a la web)-->
-				<!--
-				<li><a href="file:///C:/Users/javi/Desktop/upf%204t/TFG/WEB/casosTFG/Charts/index.html"><span class="glyphicon glyphicon-arrow-left"></span> Volver</a></li>
-				-->
+				<li><a href="file:///C:/Users/javi/Desktop/upf%204t/TFG/WEB/casosTFG/Charts/HighChart.html"><span class="glyphicon glyphicon-arrow-left"></span> Volver</a></li>
 				<!--Versión web-->
+				<!--
 				<li><a href="http://rawgit.com/javiermarper/Charts/master/HighChart.html"><span class="glyphicon glyphicon-arrow-left"></span> Volver</a></li>
+				-->
 			</ul>
 		  </div>
 		</nav>
+		
+		<br /><br /><br />
 		
 		<div class="row animation-element slide-left" id="ProcedTit">
 			<div class="col-md-offset-1">
@@ -218,7 +221,7 @@ box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.2);
 		<br />
 		<div class="row animation-element slide-left" id="ResAcadTit">
 			<div class="col-md-offset-1">
-				<h3><b>RESULTADOS ACADEMICOS</b></h3>
+				<h3><b>RESULTADOS ACADÉMICOS</b></h3>
 			</div>
 			<br />
 			<div class="col-md-3">
@@ -244,7 +247,7 @@ box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.2);
 		<div class="row animation-element slide-left">
 			<div class="col-md-3 col-md-offset-1">
 				<div class="col-md-offset-4">
-					<h3><b>FLUJO PUBLICA</b></h3>
+					<h3><b>FLUJO PÚBLICA</b></h3>
 				</div>
 				<br />
 				<div id="flowPublica"></div>
@@ -324,7 +327,7 @@ Highcharts.chart('NotaMediaTitularidad', {
         type: 'column'
     },
     title: {
-        text: 'Nota Media segun Titularidad'
+        text: 'Nota Media según Titularidad'
     },
     xAxis: {
         categories: [
@@ -357,7 +360,7 @@ Highcharts.chart('NotaMediaTitularidad', {
         name: 'Acceso',
         data: [7.68, 7.10]
     },{
-        name: 'Graduacion',
+        name: 'Graduación',
         data: [7.56, 7.15]
 
     }]
@@ -369,7 +372,7 @@ Highcharts.chart('Procedencia', {
         type: 'column'
     },
     title: {
-        text: 'Procedencia segun Titularidad'
+        text: 'Procedencia según Titularidad'
     },
     subtitle: {
         text: '(sobre 10)'
@@ -405,7 +408,7 @@ Highcharts.chart('Procedencia', {
         name: 'Privada',
         data: [651, 2098]
     },{
-        name: 'Publica',
+        name: 'Pública',
         data: [651, 1392]
 
     }]
@@ -417,7 +420,7 @@ Highcharts.chart('ComparativaTitularidad', {
         type: 'column'
     },
     title: {
-        text: 'Comparativa por Titularidad'
+        text: 'Comparativa según Titularidad'
     },
     xAxis: {
         categories: ['Privada Acceso', 'Privada Graduacion', 'Publica Acceso', 'Publica Graduacion']
@@ -437,18 +440,18 @@ Highcharts.chart('ComparativaTitularidad', {
             stacking: 'percent'
         }
     },
-    series: [{
-        name: 'Q4',
-        data: [10,5,13,5]
-    }, {
-        name: 'Q3',
-        data: [33,75,33,69]
+    series: [, {
+        name: 'Q1',
+        data: [14,3,12,3]
     }, {
         name: 'Q2',
         data: [43,17,42,23]
     }, {
-        name: 'Q1',
-        data: [14,3,12,3]
+        name: 'Q3',
+        data: [33,75,33,69]
+    }{
+        name: 'Q4',
+        data: [10,5,13,5]
     }]
 });
 </script>
@@ -458,7 +461,7 @@ Highcharts.chart('RelacionTitularidad', {
         type: 'column'
     },
     title: {
-        text: 'Relacion Acceso-Graduacion'
+        text: 'Relación Acceso-Graduación'
     },
     xAxis: {
         categories: [
@@ -492,7 +495,7 @@ Highcharts.chart('RelacionTitularidad', {
         name: 'Privada',
         data: [4,67,29]
     },{
-        name: 'Publica',
+        name: 'Pública',
         data: [7,57,36]
 
     }]
@@ -500,14 +503,14 @@ Highcharts.chart('RelacionTitularidad', {
 </script>
 <script>
   var colors = d3.scale.ordinal().range(["#AAA", "steelblue", "green", "orange", "brown"]);
-  var hoverHtml = {'fromQ4': '<h1>Cuartil 4</h1>Alumnos con nota de acceso entre 5 y 7.25 sobre 14 en el acceso', 
-      'fromQ3': '<h1>Cuartil 3</h1>Alumnos con nota de acceso entre 7.25 y 9.5 sobre 14 en el acceso', 
-      'fromQ2': '<h1>Cuartil 2</h1>Alumnos con nota de acceso entre 9.5 y 11.75 sobre 14 en el acceso',
-      'fromQ1': '<h1>Cuartil 1</h1>Alumnos con nota de acceso superior a 11.75 sobre 14 en el acceso',
-      'toQ4': '<h1>Cuartil 4</h1>Alumnos con nota de graduación entre 5 y 7.25 sobre 14 en la graduacion', 
-      'toQ3': '<h1>Cuartil 3</h1>Alumnos con nota de graduación entre 7.25 y 9.5 sobre 14 en la graduacion', 
-      'toQ2': '<h1>Cuartil 2</h1>Alumnos con nota de graduación entre 9.5 y 11.75 sobre 14 en la graduacion',
-      'toQ1': '<h1>Cuartil 1</h1>Alumnos con nota de graduación superior a 11.75 sobre 14 en la graduacion'}
+  var hoverHtml = {'fromQ4': '<h1>Cuartil 4</h1>Alumnos con nota de acceso entre 5 y 6.25 sobre 10', 
+      'fromQ3': '<h1>Cuartil 3</h1>Alumnos con nota de acceso entre 6.25 y 7.5 sobre 10', 
+      'fromQ2': '<h1>Cuartil 2</h1>Alumnos con nota de acceso entre 7.5 y 8.75 sobre 10',
+      'fromQ1': '<h1>Cuartil 1</h1>Alumnos con nota de acceso superior a 8.75 sobre 10',
+      'toQ4': '<h1>Cuartil 4</h1>Alumnos con nota de graduación entre 5 y 6.25 sobre 10', 
+      'toQ3': '<h1>Cuartil 3</h1>Alumnos con nota de graduación entre 6.25 y 7.5 sobre 10', 
+      'toQ2': '<h1>Cuartil 2</h1>Alumnos con nota de graduación entre 7.5 y 8.75 sobre 10',
+      'toQ1': '<h1>Cuartil 1</h1>Alumnos con nota de graduación superior a 8.75 sobre 10'}
   var chordDiagram = d3.elts.flowChord().colors(colors).hoverHtml(hoverHtml).rimWidth(30);
   var data = [['Cuartil','fromQ1','fromQ2','fromQ3','fromQ4'],['toQ1', 0.09,0.00,0.00,0.00], ['toQ2', 0.54,0.19,0.04,0.00],['toQ3', 0.36,0.75,0.77,0.86],['toQ4', 0.01,0.05,0.18,0.14]]
   d3.select("#flowPrivada").datum(data).call(chordDiagram);
@@ -515,14 +518,14 @@ Highcharts.chart('RelacionTitularidad', {
   </script>
 <script>
   var colors = d3.scale.ordinal().range(["#AAA", "steelblue", "green", "orange", "brown"]);
-  var hoverHtml = {'fromQ4': '<h1>Cuartil 4</h1>Alumnos con nota de acceso entre 5 y 7.25 sobre 14 en el acceso', 
-      'fromQ3': '<h1>Cuartil 3</h1>Alumnos con nota de acceso entre 7.25 y 9.5 sobre 14 en el acceso', 
-      'fromQ2': '<h1>Cuartil 2</h1>Alumnos con nota de acceso entre 9.5 y 11.75 sobre 14 en el acceso',
-      'fromQ1': '<h1>Cuartil 1</h1>Alumnos con nota de acceso superior a 11.75 sobre 14 en el acceso',
-      'toQ4': '<h1>Cuartil 4</h1>Alumnos con nota de graduación entre 5 y 7.25 sobre 14 en la graduacion', 
-      'toQ3': '<h1>Cuartil 3</h1>Alumnos con nota de graduación entre 7.25 y 9.5 sobre 14 en la graduacion', 
-      'toQ2': '<h1>Cuartil 2</h1>Alumnos con nota de graduación entre 9.5 y 11.75 sobre 14 en la graduacion',
-      'toQ1': '<h1>Cuartil 1</h1>Alumnos con nota de graduación superior a 11.75 sobre 14 en la graduacion'}
+  var hoverHtml = {'fromQ4': '<h1>Cuartil 4</h1>Alumnos con nota de acceso entre 5 y 6.25 sobre 10', 
+      'fromQ3': '<h1>Cuartil 3</h1>Alumnos con nota de acceso entre 6.25 y 7.5 sobre 10', 
+      'fromQ2': '<h1>Cuartil 2</h1>Alumnos con nota de acceso entre 7.5 y 8.75 sobre 10',
+      'fromQ1': '<h1>Cuartil 1</h1>Alumnos con nota de acceso superior a 8.75 sobre 10',
+      'toQ4': '<h1>Cuartil 4</h1>Alumnos con nota de graduación entre 5 y 6.25 sobre 10', 
+      'toQ3': '<h1>Cuartil 3</h1>Alumnos con nota de graduación entre 6.25 y 7.5 sobre 10', 
+      'toQ2': '<h1>Cuartil 2</h1>Alumnos con nota de graduación entre 7.5 y 8.75 sobre 10',
+      'toQ1': '<h1>Cuartil 1</h1>Alumnos con nota de graduación superior a 8.75 sobre 10'}
   var chordDiagram = d3.elts.flowChord().colors(colors).hoverHtml(hoverHtml).rimWidth(30);
   var data = [['Cuartil','fromQ1','fromQ2','fromQ3','fromQ4'],['toQ1', 0.09,0.02,0.00,0.00], ['toQ2', 0.61,0.27,0.09,0.05],['toQ3', 0.28,0.67,0.78, 0.74],['toQ4', 0.02,0.05,0.13,0.21]]
   d3.select("#flowPublica").datum(data).call(chordDiagram);
@@ -534,21 +537,21 @@ Highcharts.chart('TiempoGraduarseTitul', {
         type: 'column'
     },
     title: {
-        text: 'Tiempo Graduarse segun Titularidad'
+        text: 'Tiempo Graduarse según Titularidad'
     },
     xAxis: {
         categories: [
-            'AnysQ4',
-            'AnysQ3',
-			'AnysQ2',
-			'AnysQ1'
+            'AñosQ4',
+            'AñosQ3',
+			'AñosQ2',
+			'AñosQ1'
         ],
         crosshair: true
     },
     yAxis: {
         min: 4,
         title: {
-            text: 'Anys'
+            text: 'Años'
         }
     },
     tooltip: {
@@ -569,7 +572,7 @@ Highcharts.chart('TiempoGraduarseTitul', {
         name: 'Privada',
         data: [4.94,4.56,4.36,4.11]
     },{
-        name: 'Publica',
+        name: 'Pública',
         data: [4.89,4.57,4.25,4.20]
     }]
 });
@@ -580,13 +583,13 @@ Highcharts.chart('RendimientoINGTitul', {
         type: 'column'
     },
     title: {
-        text: 'Rendimiento ING segun Titularidad'
+        text: 'Rendimiento ING según Titularidad'
     },
     xAxis: {
         categories: [
-            '4 Anys',
-            '5 Anys',
-			'> 5 Anys'
+            '4 Años',
+            '5 Años',
+			'> 5 Años'
         ],
         crosshair: true
     },
@@ -626,13 +629,13 @@ Highcharts.chart('RendimientoECOTitul', {
         type: 'column'
     },
     title: {
-        text: 'Rendimiento ECO segun Titularidad'
+        text: 'Rendimiento ECO según Titularidad'
     },
     xAxis: {
         categories: [
-            '4 Anys',
-            '5 Anys',
-			'> 5 Anys'
+            '4 Años',
+            '5 Años',
+			'> 5 Años'
         ],
         crosshair: true
     },
@@ -672,7 +675,7 @@ Highcharts.chart('AbandonosTitul', {
         type: 'column'
     },
     title: {
-        text: 'Abandonos segun Titularidad'
+        text: 'Abandonos según Titularidad'
     },
     xAxis: {
         categories: [
@@ -707,7 +710,7 @@ Highcharts.chart('AbandonosTitul', {
         name: 'Privada',
         data: [34,20,4,2]
     },{
-        name: 'Publica',
+        name: 'Pública',
         data: [31,16,4,3]
 
     }]
