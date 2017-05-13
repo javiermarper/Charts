@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+	
+<html>
+
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!--HighCharts-->
+	<script src="https://code.highcharts.com/highcharts.js"></script>
+	<script src="https://code.highcharts.com/modules/exporting.js"></script>
+	
+	<!-- JQuery -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+	<!--BOOTSTRAP-->
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+	<!--Chords-->
+	<script src="d3.v3.min.js"></script>
+	<script src="flowChord.js" charset="utf-8"></script>
+	
+<style>
+
+/*CHORDS*/
+    body {
+      font-family: sans-serif;
+      font-size: 12px;
+    }
+    #flow .flows {
+      opacity: .6;
+    }
+    #flow .chord-hover {
+      position: absolute;
+      visibility: hidden;
+      background: #EEE;
+      padding: 15px 25px 25px 15px;
+      border: 1px solid gray;
+      border-radius: 5px;
+    }
+/**/
+
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+/*clearfixes*/
+
+.cf:before,
+.cf:after {
+  content: " ";
+  display: table;
+}
+
+.cf:after {
+  clear: both;
+}
+
+.main-container {
+  background: #fff;
+  max-width: 1000px;
+  margin: 25px auto 25px auto;
+  position: relative;
+}
+
+.container {
+  position: relative;
+  padding: 25px;
+}
+/*animation element*/
+
+.animation-element {
+  opacity: 0;
+  position: relative;
+}
+/*animation element*/
+
+.animation-element {
+  opacity: 0;
+  position: relative;
+}
+/*animation element sliding left*/
+
+.animation-element.slide-left {
+  opacity: 0;
+  -moz-transition: all 500ms linear;
+  -webkit-transition: all 500ms linear;
+  -o-transition: all 500ms linear;
+  transition: all 500ms linear;
+  -moz-transform: translate3d(-100px, 0px, 0px);
+  -webkit-transform: translate3d(-100px, 0px, 0px);
+  -o-transform: translate(-100px, 0px);
+  -ms-transform: translate(-100px, 0px);
+  transform: translate3d(-100px, 0px, 0px);
+}
+
+.animation-element.slide-left.in-view {
+  opacity: 1;
+  -moz-transform: translate3d(0px, 0px, 0px);
+  -webkit-transform: translate3d(0px, 0px, 0px);
+  -o-transform: translate(0px, 0px);
+  -ms-transform: translate(0px, 0px);
+  transform: translate3d(0px, 0px, 0px);
+}
+/*animation slide left styled for testimonials*/
+
+.animation-element.slide-left.testimonial {
+  float: left;
+  width: 47%;
+  margin: 0% 1.5% 3% 1.5%;
+  background: #F5F5F5;
+  padding: 15px;
+box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.2);
+  border: solid 1px #EAEAEA;
+}
+.animation-element.slide-left.testimonial:hover,
+.animation-element.slide-left.testimonial:active{
+  box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.25);
+}
+
+.animation-element.slide-left.testimonial:nth-of-type(odd) {
+  width: 48.5%;
+  margin: 0% 1.5% 3.0% 0%;
+}
+
+.animation-element.slide-left.testimonial:nth-of-type(even) {
+  width: 48.5%;
+  margin: 0% 0% 3.0% 1.5%;
+}
+
+.animation-element.slide-left.testimonial .header{
+  float: left;
+  width: 100%;
+  margin-bottom: 10px;
+}
+.animation-element.slide-left.testimonial .left{
+  float: left;
+  margin-right: 15px;
+}
+.animation-element.slide-left.testimonial .right{
+  float: left;
+}
+
+.animation-element.slide-left.testimonial img {
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  box-shadow: 0px 1px 3px rgba(51, 51, 51, 0.5);
+}
+
+.animation-element.slide-left.testimonial h3 {
+  margin: 0px 0px 5px 0px;
+}
+
+.animation-element.slide-left.testimonial h4 {
+  margin: 0px 0px 5px 0px;
+}
+
+.animation-element.slide-left.testimonial .content {
+  float: left;
+  width:100%;
+  margin-bottom: 10px;
+}
+
+.animation-element.slide-left.testimonial .rating{}
+
+.animation-element.slide-left.testimonial i {
+  color: #aaa;
+  margin-right: 5px;
+}
+</style>
+</head>
+
+<body>
+<div id="AnalisisGeneral">
+		<nav class="navbar navbar-inverse navbar-fixed-top"><!--navbar-fixed-top-->
+		  <div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#">GENERAL</a>
+			</div>
+			<ul class="nav navbar-nav">
+				<li><a href="#ResAcadGen">Resultados Academicos</a></li>
+				<li><a href="#RendGen">Rendimiento</a></li>
+				<li><a href="#AbanGen">Abandonos</a></li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<!--Versión local (comentar para subirlo a la web)-->
+				<!--
+				<li><a href="file:///C:/Users/javi/Desktop/upf%204t/TFG/WEB/casosTFG/Charts/HighChart.html"><span class="glyphicon glyphicon-arrow-left"></span> Volver</a></li>
+				-->
+				<!--Versión web-->
+				<li><a href="http://rawgit.com/javiermarper/Charts/master/HighChart.html"><span class="glyphicon glyphicon-arrow-left"></span> Volver</a></li>
+			</ul>
+		  </div>
+		</nav>
+		
+		
+		<div class="row animation-element slide-left" id="ResAcadGen">
+			<div class="col-md-offset-1">
+				<h3><b>RESULTADOS ACADEMICOS</b></h3>
+			</div>
+			<br />
+			<div class="col-md-3">
+				<div id="NotaMedia"></div>
+			</div>
+			<div class="col-md-3 col-md-offset-1">
+				<div id="NotaMediaUCA"></div>
+			</div>
+			<div class="col-md-3 col-md-offset-1">
+				<div id="ComparativaUCA"></div>
+			</div>
+		</div>
+		<br />
+		<br />
+		<div class="row animation-element slide-left">
+			<div class="col-md-3 col-md-offset-4">
+				<div id="Relacion"></div>
+			</div>
+		</div>
+		<br />
+		<hr />
+		<br />
+		<div class="row animation-element slide-left" id="RendGen">
+			<div class="col-md-offset-1">
+				<h3><b>RENDIMIENTO</b></h3>
+			</div>
+			<br />
+			<div class="col-md-3 col-md-offset-2">
+				<div id="TiempoGraduarse"></div>
+			</div>
+			<div class="col-md-3 col-md-offset-2">
+				<div id="Rendimiento"></div>
+			</div>
+		</div>
+		<br />
+		<hr />
+		<br />
+		<div class="row animation-element slide-left" id="AbanGen">
+			<div class="col-md-offset-1">
+				<h3><b>ABANDONOS</b></h3>
+			</div>
+			<br />
+			<div class="col-md-3 col-md-offset-4">
+				<div id="Abandonos"></div>
+			</div>
+		</div>
+	</div>
+	
+</body>
+
+<!--Animaciones-->
+<script>
+//SCRIPT DE ANIMACIONES
+
+var $animation_elements = $('.animation-element');
+var $window = $(window);
+
+function check_if_in_view() {
+  var window_height = $window.height();
+  var window_top_position = $window.scrollTop();
+  var window_bottom_position = (window_top_position + window_height);
+ 
+  $.each($animation_elements, function() {
+    var $element = $(this);
+    var element_height = $element.outerHeight();
+    var element_top_position = $element.offset().top;
+    var element_bottom_position = (element_top_position + element_height);
+ 
+    //check to see if this current container is within viewport
+    if ((element_bottom_position >= window_top_position) &&
+        (element_top_position <= window_bottom_position)) {
+      $element.addClass('in-view');
+    } else {
+      $element.removeClass('in-view');
+    }
+  });
+}
+
+$window.on('scroll resize', check_if_in_view);
+$window.trigger('scroll');
+</script>
+
+
+<!--AnalisisGeneral-->
+<script>
+Highcharts.chart('NotaMedia', {
+    chart: {
+        type: 'column'
+    },
+    title: {
+        text: 'Nota Media'
+    },
+    subtitle: {
+        text: '(sobre 10)'
+    },
+    xAxis: {
+        categories: [
+            'Acceso',
+            'Graduacion',
+        ],
+        crosshair: true
+    },
+    yAxis: {
+        min: 5,
+        title: {
+            text: 'Nota'
+        }
+    },
+    tooltip: {
+        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+            '<td style="padding:0"><b>{point.y:.2f} </b></td></tr>',
+        footerFormat: '</table>',
+        shared: true,
+        useHTML: true
+    },
+    plotOptions: {
+        column: {
+            pointPadding: 0.2,
+            borderWidth: 0
+        }
+    },
+    series: [{
+        name: 'Nota',
+        data: [7.63, 7.16]
+
+    }]
+});
+</script>
+<script>
+Highcharts.chart('NotaMediaUCA', {
+    chart: {
+        type: 'column'
+    },
+    title: {
+        text: 'Nota Media UCA'
+    },
+    subtitle: {
+        text: '(sobre 10)'
+    },
+    xAxis: {
+        categories: [
+            'ING',
+            'ECO',
+        ],
+        crosshair: true
+    },
+    yAxis: {
+        min: 5,
+        title: {
+            text: 'Nota'
+        }
+    },
+    tooltip: {
+        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+            '<td style="padding:0"><b>{point.y:.2f} </b></td></tr>',
+        footerFormat: '</table>',
+        shared: true,
+        useHTML: true
+    },
+    plotOptions: {
+        column: {
+            pointPadding: 0.2,
+            borderWidth: 0
+        }
+    },
+    series: [{
+        name: 'Acceso',
+        data: [7.12, 8.13]
+    },{
+        name: 'Graduacion',
+        data: [7.13, 7.17]
+
+    }]
+});
+</script>
+<script>
+Highcharts.chart('ComparativaUCA', {
+    chart: {
+        type: 'column'
+    },
+    title: {
+        text: 'Comparativa por UCA'
+    },
+    xAxis: {
+        categories: ['ING Acceso', 'ING Graduacion', 'ECO Acceso', 'ECO Graduacion']
+    },
+    yAxis: {
+        min: 0,
+        title: {
+            text: 'Porcentaje Alumnos Cuartil'
+        }
+    },
+    tooltip: {
+        pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b> ({point.percentage:.0f}%)<br/>',
+        shared: true
+    },
+    plotOptions: {
+        column: {
+            stacking: 'percent'
+        }
+    },
+    series: [{
+        name: 'Q4',
+        data: [22,2,2,8]
+    }, {
+        name: 'Q3',
+        data: [47,80,19,65]
+    }, {
+        name: 'Q2',
+        data: [23,15,63,24]
+    }, {
+        name: 'Q1',
+        data: [8,3,16,3]
+    }]
+});
+</script>
+<script>
+Highcharts.chart('Relacion', {
+    chart: {
+        plotBackgroundColor: null,
+        plotBorderWidth: null,
+        plotShadow: false,
+        type: 'pie'
+    },
+    title: {
+        text: 'Relacion cuartiles Acceso-Graduacion'
+    },
+    tooltip: {
+        pointFormat: '{series.name}: <b>{point.y:.1f}%</b>'
+    },
+    plotOptions: {
+        pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+                enabled: true,
+                format: '<b>{point.name}</b>: {point.y:.1f} %',
+                style: {
+                    color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                }
+            }
+        }
+    },
+    series: [{
+        name: 'Porcentaje',
+        colorByPoint: true,
+        data: [{
+            name: 'Aumentan',
+            y: 62.20
+        }, {
+            name: 'Disminuyen',
+            y: 32.00,
+            sliced: true,
+            selected: true
+        }, {
+            name: 'Mantienen',
+            y: 15.80
+        }]
+    }]
+});
+</script>
+<script>
+Highcharts.chart('TiempoGraduarse', {
+    chart: {
+        type: 'column'
+    },
+    title: {
+        text: 'Tiempo Graduarse por UCA'
+    },
+    xAxis: {
+        categories: [
+            'AnysQ4',
+            'AnysQ3',
+			'AnysQ2',
+			'AnysQ1'
+        ],
+        crosshair: true
+    },
+    yAxis: {
+        min: 4,
+        title: {
+            text: 'Anys'
+        }
+    },
+    tooltip: {
+        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+            '<td style="padding:0"><b>{point.y:.2f} </b></td></tr>',
+        footerFormat: '</table>',
+        shared: true,
+        useHTML: true
+    },
+    plotOptions: {
+        column: {
+            pointPadding: 0.2,
+            borderWidth: 0
+        }
+    },
+    series: [{
+        name: 'ING',
+        data: [5.21, 4.85, 4.54, 4.42]
+    },{
+        name: 'ECO',
+        data: [4.91, 4.37, 4.19, 4.11]
+
+    }]
+});
+</script>
+<script>
+Highcharts.chart('Rendimiento', {
+    chart: {
+        type: 'column'
+    },
+    title: {
+        text: 'Rendimiento por UCA'
+    },
+    xAxis: {
+        categories: [
+            '4 Anys',
+            '5 Anys',
+			'> 5 Anys'
+        ],
+        crosshair: true
+    },
+    yAxis: {
+        min: 0,
+        title: {
+            text: 'Porcentaje de Alumnos'
+        }
+    },
+    tooltip: {
+        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+            '<td style="padding:0"><b>{point.y:.0f} </b></td></tr>',
+        footerFormat: '</table>',
+        shared: true,
+        useHTML: true
+    },
+    plotOptions: {
+        column: {
+            pointPadding: 0.2,
+            borderWidth: 0
+        }
+    },
+    series: [{
+        name: 'ING',
+        data: [17,19,23]
+    },{
+        name: 'ECO',
+        data: [86,16,7]
+
+    }]
+});
+</script>
+<script>
+Highcharts.chart('Abandonos', {
+    chart: {
+        type: 'column'
+    },
+    title: {
+        text: 'Abandonos por UCA'
+    },
+    xAxis: {
+        categories: [
+            'Q4',
+            'Q3',
+			'Q2',
+			'Q1'
+        ],
+        crosshair: true
+    },
+    yAxis: {
+        min: 0,
+        title: {
+            text: 'Porcentaje Abandonos'
+        }
+    },
+    tooltip: {
+        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+            '<td style="padding:0"><b>{point.y:.0f} </b></td></tr>',
+        footerFormat: '</table>',
+        shared: true,
+        useHTML: true
+    },
+    plotOptions: {
+        column: {
+            pointPadding: 0.2,
+            borderWidth: 0
+        }
+    },
+    series: [{
+        name: 'ING',
+        data: [35,25,10,4]
+    },{
+        name: 'ECO',
+        data: [18,11,4,2]
+
+    }]
+});
+</script>
+
+
+
+</html>
