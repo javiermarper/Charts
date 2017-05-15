@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-	
+	<!--Javier Martínez Pérez-->
 <html>
 
 <head>
@@ -190,7 +190,7 @@ box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.2);
 				<a class="navbar-brand" href="#">CENTROS</a>
 			</div>
 			<ul class="nav navbar-nav">
-				<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Centros Q1 <span class="caret"></span></a>
+				<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Centros sobre Q1 <span class="caret"></span></a>
 					<ul class="dropdown-menu">
 					  <li><a href="#FlujoTOTAL">Flujo sobre total</a></li>
 					  <li><a href="#FlujoING">Flujo alumnos ING</a></li>
@@ -198,12 +198,10 @@ box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.2);
 					  <li><a href="#ProcQ1">Procedencia Q1</a></li>
 					</ul>
 				</li>	
-				<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Centros TOTAL <span class="caret"></span></a>
+				<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Centros sobre TOTAL <span class="caret"></span></a>
 					<ul class="dropdown-menu">
-					  <li><a href="#"> </a></li>
-					  <li><a href="#"> </a></li>
-					  <li><a href="#"> </a></li>
-					  <li><a href="#"> </a></li>
+					  <li><a href="#TOP10TOTAL">TOP 10 </a></li>
+					  <li><a href="#PresTOP10">Presencia </a></li>
 					</ul>
 				</li>
 			</ul>
@@ -222,12 +220,12 @@ box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.2);
 		<br /><br /><br />
 		
 		
-		<div class="col-md-8 col-md-offset-1">
+		<div class="col-md-10 col-md-offset-1">
 			<h2>CENTROS DE INTERÉS PARA LA UPF SEGÚN APORTACIONES Q1</h2>
 		</div>
 		<br \><br \><br \>
 		<div class="row animation-element slide-left" id="FlujoTOTAL">
-			<div class="col-md-3 col-md-offset-1">
+			<div class="col-md-8 col-md-offset-1">
 				<div class="col-md-offset-4">
 					<h3><b>FLUJO SOBRE EL TOTAL</b></h3>
 				</div>
@@ -236,7 +234,7 @@ box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.2);
 			</div>
 		</div>
 		<div class="row animation-element slide-left" id="FlujoING">
-			<div class="col-md-3 col-md-offset-1">
+			<div class="col-md-8 col-md-offset-1">
 				<div class="col-md-offset-4">
 					<h3><b>FLUJO ALUMNOS ING</b></h3>
 				</div>
@@ -245,7 +243,7 @@ box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.2);
 			</div>
 		</div>
 		<div class="row animation-element slide-left" id="FlujoECO">
-			<div class="col-md-3 col-md-offset-1">
+			<div class="col-md-8 col-md-offset-1">
 				<div class="col-md-offset-4">
 					<h3><b>FLUJO ALUMNOS ECO</b></h3>
 				</div>
@@ -254,7 +252,7 @@ box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.2);
 			</div>
 		</div>
 		<div class="row animation-element slide-left" id="ProcQ1">
-			<div class="col-md-3 col-md-offset-1">
+			<div class="col-md-8 col-md-offset-1">
 				<div class="col-md-offset-4">
 					<h3><b>PROCEDENCIA ALUMNOS Q1</b></h3>
 				</div>
@@ -262,7 +260,37 @@ box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.2);
 				<div id="flowProced"></div>
 			</div>
 		</div>
-
+		<br />
+		<hr />
+		<br />
+		<div class="col-md-10 col-md-offset-1">
+			<h2>CENTROS DE INTERÉS PARA LA UPF SEGÚN EL TOTAL DE APORTACIONES</h2>
+		</div>
+		<div class="row animation-element slide-left" id="TOP10TOTAL">
+			<div class="col-md-8 col-md-offset-1">
+				<div class="col-md-offset-4">
+					<h3><b>TOP 10 SOBRE TOTAL</b></h3>
+				</div>
+				<br />
+				<div id="flowTOP10TOTAL"></div>
+			</div>
+		</div>
+		<br />
+		<hr />
+		<br />
+		<div class="col-md-8 col-md-offset-1">
+			<h2>PRESENCIA DE LOS CENTROS EN LA UPF</h2>
+		</div>
+		<div class="row animation-element slide-left" id="PresTOP10">
+			<div class="col-md-8 col-md-offset-1">
+				<div class="col-md-offset-4">
+					<h3><b>PRESENCIA TOP 10</b></h3>
+				</div>
+				<br />
+				<div id="flowPresencia"></div>
+			</div>
+		</div>
+		
 		
 </div>
 
@@ -378,6 +406,59 @@ $window.trigger('scroll');
 
   </script>
 
+<script>
+  var colors = d3.scale.ordinal().range(["#AAA", "steelblue", "green", "orange", "brown"]);
+  var hoverHtml = {'Frederic Mistral-Tecnic Eulalia': '<h1>Frederic Mistral-Tècnic Eulàlia</h1>',
+	  'Institucio Cultural del CIC': '<h1>Institució Cultural del CIC</h1>',
+	  'Lycee Francais de Barcelone': '<h1>Lycée Français de Barcelone</h1>',
+	  'Betania-Patmos': '<h1>Betània-Patmos</h1>',
+	  'Escola Pia de Mataro': '<h1>Escola Pia de Mataró</h1>',
+	  'Sant Ignasi': '<h1>Sant Ignasi</h1>',
+	  'Casp-Sagrat Cor de Jesus': '<h1>Casp-Sagrat Cor de Jesús</h1>',
+	  'El Clot': '<h1>El Clot</h1>',
+	  'Sunion': '<h1>Súnion</h1>',
+	  'Sagrat Cor-Diputacio': '<h1>Sagrat Cor-Diputació</h1>',
+	  'ADE': '<h1>ADE</h1>Administración y Dirección de Empresas', 
+      'ECO': '<h1>ECO</h1>Economía', 
+      'EMP': '<h1>EMP</h1>Ciencias Empresariales-Management',
+      'IBE': '<h1>IBE</h1>International Business Economics',
+      'ESA': '<h1>ESA</h1>Ingenieria de Sistemas Audiovisuales', 
+      'TEL': '<h1>TEL</h1>Ingenieria Telemática', 
+      'INF': '<h1>INF</h1>Ingenieria en Informática',
+      'BIO': '<h1>BIO</h1>Ingenieria Biomédica'}
+  var chordDiagram = d3.elts.flowChord().colors(colors).hoverHtml(hoverHtml).rimWidth(30);
+  var data = [['Grado','Frederic Mistral-Tecnic Eulalia','Institucio Cultural del C.I.C.','El Clot','Sant Ignasi','Casp-Sagrat Cor de Jesus','Lycee Francais de Barcelone','Escola Pia de Mataro','Sunion','Betania-Patmos','Sagrat Cor-Diputacio'],
+['ESA', 0.08,0.00,0.25,0.03,0.08,0.03,0.14,0.25,0.00,0.14], ['TEL', 0.12,0.18,0.47,0.00,0.06,0.00,0.06,0.06,0.00,0.06],['INF', 0.02,0.02,0.47,0.04,0.10,0.00,0.10,0.10,0.00,0.14],['BIO',0.07,0.29,0.00,0.00,0.14,0.07,0.00,0.43,0.00,0.00],
+['ADE',0.17,0.13,0.03,0.09,0.11,0.11,0.17,0.04,0.10,0.06],['ECO',0.18,0.14,0.05,0.14,0.12,0.15,0.03,0.08,0.08,0.05],['EMP',0.14,0.14,0.05,0.13,0.06,0.07,0.11,0.04,0.14,0.13],['IBE',0.19,0.16,0.03,0.15,0.07,0.10,0.07,0.10,0.12,0.01]]
+  d3.select("#flowTOP10TOTAL").datum(data).call(chordDiagram);
 
+  </script>
+<script>
+  var colors = d3.scale.ordinal().range(["#AAA", "steelblue", "green", "orange", "brown"]);
+  var hoverHtml = {'Frederic Mistral-Tecnic Eulalia': '<h5>Frederic Mistral-Tècnic Eulàlia</h5>',
+	  'Institucio Cultural del CIC': '<h1>Institució Cultural del CIC</h1>',
+	  'Lycee Francais de Barcelone': '<h1>Lycée Français de Barcelone</h1>',
+	  'Betania-Patmos': '<h1>Betània-Patmos</h1>',
+	  'Escola Pia de Mataro': '<h1>Escola Pia de Mataró</h1>',
+	  'Sant Ignasi': '<h1>Sant Ignasi</h1>',
+	  'Casp-Sagrat Cor de Jesus': '<h1>Casp-Sagrat Cor de Jesús</h1>',
+	  'El Clot': '<h1>El Clot</h1>',
+	  'Sunion': '<h1>Súnion</h1>',
+	  'Sagrat Cor-Diputacio': '<h1>Sagrat Cor-Diputació</h1>',
+	  'ADE': '<h1>ADE</h1>Administración y Dirección de Empresas', 
+      'ECO': '<h1>ECO</h1>Economía', 
+      'EMP': '<h1>EMP</h1>Ciencias Empresariales-Management',
+      'IBE': '<h1>IBE</h1>International Business Economics',
+      'ESA': '<h1>ESA</h1>Ingenieria de Sistemas Audiovisuales', 
+      'TEL': '<h1>TEL</h1>Ingenieria Telemática', 
+      'INF': '<h1>INF</h1>Ingenieria en Informática',
+      'BIO': '<h1>BIO</h1>Ingenieria Biomédica'}
+  var chordDiagram = d3.elts.flowChord().colors(colors).hoverHtml(hoverHtml).rimWidth(30);
+  var data = [['Any','Frederic Mistral-Tecnic Eulalia','Institucio Cultural del C.I.C.','El Clot','Sant Ignasi','Casp-Sagrat Cor de Jesus','Lycee Francais de Barcelone','Escola Pia de Mataro','Sunion','Betania-Patmos','Sagrat Cor-Diputacio'],
+['2009', 5,9,7,8,7,9,10,4,6,8], ['2010', 16,4,7,6,6,5,5,6,3,5],['2011', 14,10,12,12,9,11,5,8,12,5],['2012',10,16,5,8,7,9,7,5,5,7],
+['2013',16,9,6,4,10,9,5,8,5,6],['2014',6,8,7,9,5,2,11,5,9,2],['2015',13,11,13,9,7,5,6,13,4,7]]
+  d3.select("#flowPresencia").datum(data).call(chordDiagram);
+
+  </script>
   
 </html>

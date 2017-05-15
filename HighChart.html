@@ -1,12 +1,10 @@
 <!DOCTYPE html>
+<!--Javier Martínez Pérez-->
 	
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<!--HighCharts-->
-	<script src="https://code.highcharts.com/highcharts.js"></script>
-	<script src="https://code.highcharts.com/modules/exporting.js"></script>
 	
 	<!-- JQuery -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -18,10 +16,6 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-
-	<!--Chords-->
-	<script src="d3.v3.min.js"></script>
-	<script src="flowChord.js" charset="utf-8"></script>
 	
 	<!--radial menu-->
 	<link href="//netdna.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
@@ -129,55 +123,59 @@
 <body>
 
 <div class="container-fluid" id="inicio">
-	<br />
 
-	<div class="dropdown col-md-offset-1" hidden>
-	  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Select Analisys
-	  <span class="caret"></span></button>
-	  <ul class="dropdown-menu">
-	  
-		<!--Versión local (comentar para subirlo a la web)-->
-		
-		<li><a id="General" href="file:///C:/Users/javi/Desktop/upf%204t/TFG/WEB/casosTFG/Charts/general.html">General</a></li>
-		<li><a id="Titularidad" href="file:///C:/Users/javi/Desktop/upf%204t/TFG/WEB/casosTFG/Charts/titularidad.html">Titularidad</a></li>
-		<li><a id="Via" href="file:///C:/Users/javi/Desktop/upf%204t/TFG/WEB/casosTFG/Charts/viaAcceso.html">Vía Acceso</a></li>
-		<li><a id="Centros" href="file:///C:/Users/javi/Desktop/upf%204t/TFG/WEB/casosTFG/Charts/centros.html">Centros</a></li>
-		
-		<!--Versión web-->
-		<!--
-		<li><a id="General" href="http://rawgit.com/javiermarper/Charts/master/general.html">General</a></li>
-		<li><a id="Titularidad" href="http://rawgit.com/javiermarper/Charts/master/titularidad.html">Titularidad</a></li>
-		<li><a id="Via" href="http://rawgit.com/javiermarper/Charts/master/viaAcceso.html">Via Acceso</a></li>
-		<li><a id="Centros" href="http://rawgit.com/javiermarper/Charts/master/centros.html">Centros</a></li>-->
-	  </ul>
-	</div>
-	
 	<br /><br /><br />
-	<div class="col-md-4 col-md-offset-4">
-	<!--Local-->
-	<!--
-		<div class="row">
+	<div class="row">
+		<div class="col-md-3">
+		<!--Local-->
+		<!--
 			<div class="radial-menu">
 				<a href="file:///C:/Users/javi/Desktop/upf%204t/TFG/WEB/casosTFG/Charts/general.html"><div class="menu-item4" title="Análisis General"><i class="fa fa-graduation-cap fa-2x"></i></div></a>
-				<a href="file:///C:/Users/javi/Desktop/upf%204t/TFG/WEB/casosTFG/Charts/titularidad.html"><div class="menu-item3" title="Análisis Titularidad"><i class="fa fa-universal-access fa-2x"></i></div></a>
+				<a href="file:///C:/Users/javi/Desktop/upf%204t/TFG/WEB/casosTFG/Charts/titularidad.html"><div class="menu-item3" title="Análisis Titularidad"><i class="fa fa-tag fa-2x"></i></div></a>
 				<a href="file:///C:/Users/javi/Desktop/upf%204t/TFG/WEB/casosTFG/Charts/centros.html"><div class="menu-item1" title="Análisis Centros"><i class="fa fa-institution fa-2x"></i></div></a>
 				<a href="file:///C:/Users/javi/Desktop/upf%204t/TFG/WEB/casosTFG/Charts/viaAcceso.html"><div class="menu-item2" title="Análisis Vía Acceso"><i class="fa fa-road fa-2x"></i></div></a>
-				<div class="mask"><i class="fa fa-home fa-3x"></i></div>
+				<div class="mask" title="Inicio"><i class="fa fa-home fa-3x"></i></div>
 			</div>
 		</div>
 		-->
-	<!--Web-->
-	
-		<div class="row">
-			<div class="radial-menu">
-				<a href="http://rawgit.com/javiermarper/Charts/master/general.html"><div class="menu-item4" title="Análisis General"><i class="fa fa-graduation-cap fa-2x"></i></div></a>
-				<a href="http://rawgit.com/javiermarper/Charts/master/titularidad.html"><div class="menu-item3" title="Análisis Titularidad"><i class="fa fa-universal-access fa-2x"></i></div></a>
-				<a href="http://rawgit.com/javiermarper/Charts/master/centros.html"><div class="menu-item1" title="Análisis Centros"><i class="fa fa-institution fa-2x"></i></div></a>
-				<a href="http://rawgit.com/javiermarper/Charts/master/viaAcceso.html"><div class="menu-item2" title="Análisis Vía Acceso"><i class="fa fa-road fa-2x"></i></div></a>
-				<div class="mask"><i class="fa fa-home fa-3x"></i></div>
+		<!--Web-->
+		
+			<div class="row">
+				<div class="radial-menu">
+					<a href="http://rawgit.com/javiermarper/Charts/master/general.html"><div class="menu-item4" title="Análisis General"><i class="fa fa-graduation-cap fa-2x"></i></div></a>
+					<a href="http://rawgit.com/javiermarper/Charts/master/titularidad.html"><div class="menu-item3" title="Análisis Titularidad"><i class="fa fa-tag fa-2x"></i></div></a>
+					<a href="http://rawgit.com/javiermarper/Charts/master/centros.html"><div class="menu-item1" title="Análisis Centros"><i class="fa fa-institution fa-2x"></i></div></a>
+					<a href="http://rawgit.com/javiermarper/Charts/master/viaAcceso.html"><div class="menu-item2" title="Análisis Vía Acceso"><i class="fa fa-road fa-2x"></i></div></a>
+					<div class="mask" title="Inicio><i class="fa fa-home fa-3x"></i></div>
+				</div>
 			</div>
-		</div>
-	
+		
+	</div>
+	<div class="col-md-6 col-md-offset-3">
+		<h2>Análisis de datos de la UPF</h2>
+	</div>
+	<div class="col-md-6 col-md-offset-3 well" style=" border:4px solid red;">
+		<p>En este estudio se ha trabajado con datos anonimizados de algo más de 6000 estudiantes que han pasado por 8 de los 
+		grados de la Universidad Pompeu Fabra (UPF), 4 correspondientes a la Unidad de Coordinación Académica (UCA) de 
+		ingenierías y 4 a la de economía, a lo largo de 7 cursos académicos. Los cursos académicos abarcan desde el 2009-2010, 
+		curso en el que se introdujo la normativa de grados de 4 años de duración, hasta el 2015-2016. <br>
+		<br>
+		Se han analizado los datos sobre:<br><br>
+
+			- Los resultados académicos de los estudiantes (nota media del expediente sobre las asignaturas obligatorias y las básicas). <br><br>
+
+			- El número de alumnos que terminan en 4 años, los que lo hacen en 5 y los que lo hacen en más de 5 años.<br><br>
+			
+		Una aportación importante del estudio consiste en:<br><br>
+
+			- El análisis de los resultados según la nota y la vía de acceso (formación profesional y selectividad) del estudiante a la universidad.<br><br> 
+
+			- El análisis de la titularidad del centro de estudios preuniversitarios del que proviene.<br><br>
+
+			- El análisis de los centros de los que provienen los estudiantes.<br>
+		
+		<div class="alert alert-info">Pulsar el botón "Inicio <i class="fa fa-home"></i>" para acceder a los diferentes análisis realizados.</div>
+		<p>
 	</div>
 </div>
 
@@ -243,8 +241,7 @@
 });
 
 </script>
-	
-</div>
+</script>
 
 
 
